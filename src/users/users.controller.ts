@@ -11,6 +11,7 @@ import { Roles } from 'src/guards/roles.decorator';
 @ApiTags('Users')
 @Controller('users')
 @ApiBearerAuth('access_token')
+@Roles('ADMIN')
 @UseGuards(JwtAuthGuard)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
@@ -34,7 +35,6 @@ export class UsersController {
   }
 
   // получить список пользователей
-  @Roles('ADMIN')
   @ApiOperation({ summary: "Get user list" })
   @ApiResponse({ status: HttpStatus.OK, description: "Success", type: [User] })
   @Get()
