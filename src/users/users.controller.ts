@@ -25,57 +25,57 @@ export class UsersController {
   }
 
   // найти пользователя по id
+  @Get(':id')
   @ApiOperation({ summary: "Get user by id" })
   @ApiParam({ name: "userId", required: true, description: "User identifier" })
   @ApiResponse({ status: HttpStatus.OK, description: "Success", type: User })
   @ApiResponse({ status: HttpStatus.BAD_REQUEST, description: "User not in database" })
-  @Get(':id')
   findOneById(@Param('id') id: string) {
     return this.usersService.findOneById(+id);
   }
 
   // получить список пользователей
+  @Get()
   @ApiOperation({ summary: "Get user list" })
   @ApiResponse({ status: HttpStatus.OK, description: "Success", type: [User] })
-  @Get()
   findAll() {
     return this.usersService.findAll();
   }
 
   // обновить данные пользователя
+  @Patch(':id')
   @ApiOperation({ summary: "Update user data" })
   @ApiParam({ name: "id", required: true, description: "User identifier" })
   @ApiResponse({ status: HttpStatus.OK, description: "Success", type: UpdateUserDto })
   @ApiResponse({ status: HttpStatus.BAD_REQUEST, description: "Bad Request" })
-  @Patch(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(+id, updateUserDto);
   }
 
   // удалить пользователя
+  @Delete(':id')
   @ApiOperation({ summary: "Delete user by id" })
   @ApiParam({ name: "userId", required: true, description: "User identifier" })
   @ApiResponse({ status: HttpStatus.OK, description: "Success", type: User })
   @ApiResponse({ status: HttpStatus.BAD_REQUEST, description: "User not in database" })
-  @Delete(':id')
   remove(@Param('id') id: string) {
     return this.usersService.remove(+id);
   }
 
   // добавление роли пользователю
+  @Post('roles/add')
   @ApiOperation({ summary: "Add role to user" })
   @ApiResponse({ status: HttpStatus.OK, description: "Success", type: User })
   @ApiResponse({ status: HttpStatus.BAD_REQUEST, description: "User or Role not in database" })
-  @Post('roles/add')
   giveRole(@Body() roleDto: RoleDto) {
     return this.usersService.giveRole(roleDto);
   }
 
   // добавление роли пользователю
+  @Post('roles/remove')
   @ApiOperation({ summary: "Remove role to user" })
   @ApiResponse({ status: HttpStatus.OK, description: "Success", type: User })
   @ApiResponse({ status: HttpStatus.BAD_REQUEST, description: "User or Role not in database" })
-  @Post('roles/remove')
   removeRole(@Body() roleDto: RoleDto) {
     return this.usersService.removeRole(roleDto);
   }

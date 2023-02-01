@@ -5,10 +5,12 @@ import { UpdateRoleDto } from './dto/update-role.dto';
 import { ApiBearerAuth, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 import { Role } from './entities/role.entity';
+import { Roles } from 'src/guards/roles.decorator';
 
 @ApiTags('Roles')
 @Controller('roles')
 @ApiBearerAuth('access_token')
+@Roles('ADMIN')
 @UseGuards(JwtAuthGuard)
 export class RolesController {
   constructor(private readonly rolesService: RolesService) {}
