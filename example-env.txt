@@ -1,0 +1,7 @@
+PORT=3000
+POSTGRES_HOST=localhost
+POSTGRES_USER=database_user
+POSTGRES_DB=database_name
+POSTGRES_PASSWORD=database_pass
+POSTGRES_PORT=database_port
+RIVATE_KEY=secret_key
